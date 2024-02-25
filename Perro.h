@@ -21,7 +21,7 @@ public:
     Perro(int id, int edad, string nombre, string raza, string tamanio, string color);
     ~Perro();
 
-    void ladrar();
+    string ladrar();
 
     int getId();
     int getEdad();

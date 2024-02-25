@@ -21,10 +21,14 @@ void Refugio::recibirPerro(int edad, string nombre, string raza, string tamanio,
     Perro* pPerroTemp = new Perro(this->acumPerros, edad, nombre, raza, tamanio, color); // Creado en el heap
 
     // TO DO: Agregar el objeto al final de un vector.
+    this->bdPerros.push_back(pPerroTemp);
 
     // TO DO: Agregar el objeto a un map de dos formas: Definiendo manualmente la llave o creando un par llave + referencia.
     //Ejemplo1: this-mapita[id] = referencia;
+    this->mapaPerros[pPerroTemp->getId()] = pPerroTemp;
+
     //Ejemplo2: this->mapita.insert(make_pair(this->soyElID, soyLaReferencia));
+    this->mapaPerros.insert(make_pair(pPerroTemp->getId(), pPerroTemp));
 
     this->acumPerros++; // incrementa el contador de perros
 }
@@ -35,11 +39,17 @@ void Refugio::mostrarPerros() {
     unordered_map<int, Perro*>::iterator itMap;
 
     cout << "Los perros en el refugio son:\n";
+    // Recorrer el vector
     cout << "\nVECTOR\n";
-    // TO DO: AQUI DEBERÍA IR EL CICLO QUE RECORRE EL VECTOR
+    for (itVector = bdPerros.begin(); itVector != bdPerros.end(); ++itVector) {
+        cout << "Perro ID: " << (*itVector)->getId() << ", Nombre: " << (*itVector)->getNombre() << ", Edad: " << (*itVector)->getEdad() << endl;
+    }
 
+// Recorrer el map
     cout << "\nMAP\n";
-    // TO DO: AQUI DEBERÍA IR EL CICLO QUE RECORRE EL MAPA
+    for (itMap = mapaPerros.begin(); itMap != mapaPerros.end(); ++itMap) {
+        cout << "Perro ID: " << itMap->second->getId() << ", Nombre: " << itMap->second->getNombre() << ", Edad: " << itMap->second->getEdad() << endl;
+    }
 
 }
 
